@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black">
+
+    <EditText
+        android:id="@+id/pallavi_et"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_margin="10dp"
+        android:hint="pallavi"
+        android:inputType="textCapSentences|textMultiLine"
+        android:maxLength="2000"
+        android:maxLines="4" />
+
+    <EditText
+        android:id="@+id/first_charanam_et"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/pallavi_et"
+        android:layout_margin="10dp"
+        android:hint="@string/charanam_1"
+        android:inputType="textCapSentences|textMultiLine"
+        android:maxLength="2000"
+        android:maxLines="4" />
+
+    <EditText
+        android:id="@+id/second_charanam_et"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/first_charanam_et"
+        android:layout_margin="10dp"
+        android:hint="@string/charanam_2"
+        android:inputType="textCapSentences|textMultiLine"
+        android:maxLength="2000"
+        android:maxLines="4" />
+
+    <EditText
+        android:id="@+id/third_charanam_et"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/second_charanam_et"
+        android:layout_margin="10dp"
+        android:hint="@string/charanam_3"
+        android:inputType="textCapSentences|textMultiLine"
+        android:maxLength="2000"
+        android:maxLines="4" />
+
+    <EditText
+        android:id="@+id/youtube_et"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/third_charanam_et"
+        android:hint="@string/youtube_link"
+        android:inputType="textCapSentences|textMultiLine"
+        android:maxLength="2000"
+        android:layout_margin="10dp"
+        android:maxLines="4" />
+
+    <Button
+        android:id="@+id/submit_song"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/youtube_et"
+        android:layout_margin="10dp"
+        android:background="@color/colorPrimary_1000"
+        android:text="@string/submit"
+        android:textColor="@color/white" />
+
+
+    <Button
+        android:id="@+id/export_db"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/submit_song"
+        android:layout_margin="10dp"
+        android:text="Export Database" />
+</RelativeLayout>

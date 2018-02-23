@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "806708288673",
+    "firebase_url": "https://telugu-lyrics-84bd1.firebaseio.com",
+    "project_id": "telugu-lyrics-84bd1",
+    "storage_bucket": "telugu-lyrics-84bd1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:806708288673:android:3e2befb030fc9b32",
+        "android_client_info": {
+          "package_name": "org.kprsongs.glorytogod"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "806708288673-25uj6hp78n6d4r5dn7jpno8h4d126ihq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCOm7g0J5xtgzDn_oSSa4Si5S6-co4OGhc"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

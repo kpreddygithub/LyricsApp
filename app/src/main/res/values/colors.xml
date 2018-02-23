@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#000000</color>
+    <color name="white">#ffffff</color>
+    <color name="gray">#e0e0e0</color>
+    <color name="clear">#00000000</color>
+    <color name="blue">#0066CC</color>
+    <color name="darkGray">#787878</color>
+    <color name="liteGray">#83373138</color>
+    <color name="red_light">#ffff4444</color>
+    <color name="green_light">#ff99cc00</color>
+    <color name="orange_light">#ffffbb33</color>
+    <color name="blue_light">#dc58ade5</color>
+    <color name="aresenic">#3B444B</color>
+    <color name="dark_blue">#003366</color>
+    <color name="list_item_title">#fff</color>
+    <color name="list_background">#303030</color>
+    <color name="list_background_pressed">#992416</color>
+    <color name="list_divider">#272727</color>
+    <color name="counter_text_bg">#626262</color>
+    <color name="counter_text_color">#c5c4c4</color>
+    <color name="default_screen_bg">#f9f9f9</color>
+    <color name="rounded_container_bg">#222222</color>
+    <color name="rounded_container_border">#3b3f44</color>
+    <color name="light_gray_header_color">#646663</color>
+
+    <color name="light_green">#8bc34a</color>
+    <color name="dark_green">#558b2f</color>
+    <color name="tabsScrollColor">#ff99cc00</color>
+
+    <color name="dark_brown">#880000</color>
+    <color name="light_brown">#a20000</color>
+    <!--#06a1ee-->
+    <color name="dark_navy_blue">#ca1329</color>
+    <color name="light_navy_blue">#ca1329</color>
+    <color name="shade_blue">#E57373</color>
+    <color name="disabled_white">#F2F2F2</color>
+
+    <color name="colorPrimary_1000">#ca1329</color>
+    <color name="colorPrimaryDark_1000">#ca1329</color>
+    <color name="colorAccent_1000">#E57373</color>
+</resources>

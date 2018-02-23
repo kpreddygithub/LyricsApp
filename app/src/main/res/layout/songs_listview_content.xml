@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="5dp">
+
+    <TextView
+        android:id="@+id/songsTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clickable="false"
+        android:longClickable="false"
+        android:padding="10dp"
+        android:text="Title"
+        android:textColor="@android:color/black"
+        android:textSize="18sp"/>
+
+    <ImageView
+        android:id="@+id/optionMenuIcon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="13dp"
+        android:contentDescription="optionMenu"
+        android:paddingLeft="2dp"
+        android:paddingRight="5dp"
+        android:src="@drawable/ic_action_overflow"/>
+</RelativeLayout>

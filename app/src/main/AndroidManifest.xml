@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="org.kprsongs.glorytogod">
+
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+    <application
+        android:name="org.kprsongs.SongsApplication"
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="Telugu Lyrics"
+        android:theme="@style/MainAppTheme">
+
+        <activity
+            android:name="org.kprsongs.activity.SplashScreenActivity"
+            android:theme="@style/MainAppTheme">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="org.kprsongs.activity.NavigationDrawerActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:screenOrientation="fullSensor"
+            android:theme="@style/MaterialAppTheme">
+            <!--android:launchMode="singleTask">-->
+            <meta-data
+                android:name="android.app.searchable"
+                android:resource="@xml/searchable" />
+        </activity>
+
+        <activity android:name="org.kprsongs.activity.SongContentViewActivity"></activity>
+        <activity
+            android:name="org.kprsongs.activity.ServiceSongListActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:screenOrientation="fullSensor">
+            <meta-data
+                android:name="android.app.searchable"
+                android:resource="@xml/searchable" />
+        </activity>
+        <activity
+            android:name="org.kprsongs.activity.UserSettingActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:screenOrientation="fullSensor"
+            android:theme="@style/Theme.CustomPreferenceSetting">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="org.kprsongs.activity.NavigationDrawerActivity" />
+        </activity>
+        <activity android:name="org.kprsongs.activity.SongListActivity"></activity>
+        <activity android:name="org.kprsongs.fragment.DisplayNewSongsActivity"></activity>
+        <activity
+            android:name="org.kprsongs.activity.CustomYoutubeBoxActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:theme="@style/AppTheme.Translucent" />
+
+
+    </application>
+
+    <!--permissions to access remote url-->
+
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.INTERNET"></uses-permission>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"></uses-permission>
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"></uses-permission>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+
+</manifest>
