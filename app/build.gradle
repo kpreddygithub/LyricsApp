@@ -17,6 +17,20 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    signingConfigs {
+        debug {
+            storeFile file('./debug.keystore')
+            storePassword '14121988'
+            keyAlias 'lyrics'
+            keyPassword '14121988'
+        }
+        release {
+            storeFile file('./debug.keystore')
+            storePassword '14121988'
+            keyAlias 'lyrics'
+            keyPassword '14121988'
+        }
+    }
     dexOptions {
         javaMaxHeapSize "4g"
     }
