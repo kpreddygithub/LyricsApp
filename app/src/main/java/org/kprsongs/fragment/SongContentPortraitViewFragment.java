@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -12,6 +14,10 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.webkit.WebChromeClient;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -57,6 +63,10 @@ public class SongContentPortraitViewFragment extends Fragment implements YouTube
     private static final String KEY_VIDEO_TIME = "KEY_VIDEO_TIME";
     private int millis;
     private SongListAdapterService songListAdapterService;
+    private String mVideoId;
+    private FrameLayout mContentView;
+    private FrameLayout mCustomViewContainer;
+    private View mCustomView;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -80,10 +90,18 @@ public class SongContentPortraitViewFragment extends Fragment implements YouTube
         songCarViewAdapter = new SongCardViewAdapter(song.getContents(), this.getActivity());
         songCarViewAdapter.notifyDataSetChanged();
         recList.setAdapter(songCarViewAdapter);
-//         setYouTubeView(view);
         setOptionsImageView(view, song.getContents());
         setTitleTextView(view);
+        mVideoId = song.getUrlKey();
         setFloatingButton(view, song.getUrlKey());
+        frameLayout = (FrameLayout) view.findViewById(R.id.fragment_webview_player);
+        if (mVideoId != null && mVideoId.length() > 0) {
+            setYouTubeWebView(view, song.getUrlKey());
+            frameLayout.setVisibility(View.VISIBLE);
+        } else {
+            frameLayout.setVisibility(View.GONE);
+        }
+
         view.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
@@ -128,16 +146,75 @@ public class SongContentPortraitViewFragment extends Fragment implements YouTube
     }
 
     //TODO:To display youtube in same view
-//    private void setYouTubeView(View view)
-//    {
-//        mYoutubePlayerFragment = new YouTubePlayerSupportFragment();
-//        mYoutubePlayerFragment.initialize("AIzaSyB7hLcRMs5KPZwElJnHBPK5DNmDqFxVy3s", this);
-//        frameLayout = (FrameLayout) view.findViewById(R.id.fragment_youtube_player);
-//        FragmentManager fragmentManager = getFragmentManager();
-//        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-//        fragmentTransaction.replace(R.id.fragment_youtube_player, mYoutubePlayerFragment);
-//        fragmentTransaction.commit();
-//    }
+    private void setYouTubeView(View view, String urlKey) {
+/*
+        frameLayout = (FrameLayout) view.findViewById(R.id.fragment_youtube_player);
+        if (urlKey != null && urlKey.length() > 0) {
+            frameLayout.setVisibility(View.VISIBLE);
+            mYoutubePlayerFragment = new YouTubePlayerSupportFragment();
+            mYoutubePlayerFragment.initialize("AIzaSyCOm7g0J5xtgzDn_oSSa4Si5S6-co4OGhc", this);
+
+            FragmentManager fragmentManager = getFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            fragmentTransaction.replace(R.id.fragment_youtube_player, mYoutubePlayerFragment);
+            fragmentTransaction.commit();
+        } else {
+//            frameLayout.setVisibility(View.GONE);
+        }
+*/
+
+    }
+
+
+    private void setYouTubeWebView(View view, String urlKey) {
+        WebView myWebView = (WebView) view.findViewById(R.id.webView);
+        MyWebChromeClient client = new MyWebChromeClient();
+        myWebView.setWebChromeClient(client);
+//        myWebView.setWebViewClient(new WebViewClient() {
+//            @Override
+//            public boolean shouldOverrideUrlLoading(WebView view, String url) {
+//                return false;
+//            }
+//        });
+        WebSettings webSettings = myWebView.getSettings();
+        webSettings.setJavaScriptEnabled(true);
+        webSettings.setPluginState(WebSettings.PluginState.ON);
+        myWebView.setBackgroundColor(0x00000000);
+        myWebView.setKeepScreenOn(true);
+        myWebView.setHorizontalScrollBarEnabled(false);
+        myWebView.setVerticalScrollBarEnabled(false);
+
+        final String mimeType = "text/html";
+        final String encoding = "UTF-8";
+//        String html = getHTML();
+//        myWebView.loadDataWithBaseURL("", html, mimeType, encoding, "");
+        myWebView.loadUrl("https://www.youtube.com/embed/" + mVideoId + "?controls=1&showinfo=0&showsearch=0&modestbranding=1&autoplay=1&fs=0&iv_load_policy=3&nologo=1&loop=1&&playlist=" + mVideoId);
+    }
+
+
+    public String getHTML() {
+
+        String html = "<html>"
+
+                + "<head>"
+                + "</head>"
+                + "<body style=\"border: 0; padding: 0\">"
+                + "<iframe "
+                + "type=\"text/html\" "
+                + "class=\"youtube-player\" "
+                + "width= 100%\""
+                + "\" "
+                + "height= 95%\""
+                + "\" "
+                + "src=\"https://www.youtube.com/v/"
+                + mVideoId
+                + "?controls=0&showinfo=0&showsearch=0&modestbranding=0" +
+                "&autoplay=1&fs=1&vq=hd720\" " + "frameborder=\"0\"></iframe>"
+                + "</body>"
+                + "</html>";
+
+        return html;
+    }
 
     private void showStatusBar() {
         if (Build.VERSION.SDK_INT < 16) {
@@ -151,6 +228,7 @@ public class SongContentPortraitViewFragment extends Fragment implements YouTube
     }
 
     private void setFloatingButton(View view, final String urrlKey) {
+/*
         playVideoStatus = preferenceSettingService.getPlayVideoStatus();
         FloatingActionButton playSongFloatingActionButton = (FloatingActionButton) view.findViewById(R.id.play_song_fab);
         if (urrlKey != null && urrlKey.length() > 0 && playVideoStatus == true) {
@@ -162,6 +240,7 @@ public class SongContentPortraitViewFragment extends Fragment implements YouTube
                 }
             });
         }
+*/
     }
 
     private void showYouTube(String urlKey) {
@@ -174,8 +253,8 @@ public class SongContentPortraitViewFragment extends Fragment implements YouTube
     @Override
     public void onInitializationSuccess(YouTubePlayer.Provider provider, YouTubePlayer youTubePlayer, boolean wasRestored) {
         mPlayer = youTubePlayer;
-        if (!wasRestored) {
-            youTubePlayer.loadVideo("yKc-ey5pnNo");
+        if (mVideoId != null && !wasRestored) {
+            youTubePlayer.loadVideo(mVideoId);
         }
 
         if (wasRestored) {
@@ -204,4 +283,50 @@ public class SongContentPortraitViewFragment extends Fragment implements YouTube
                     Toast.LENGTH_LONG).show();
         }
     }
+
+    public class MyWebChromeClient extends WebChromeClient {
+
+        FrameLayout.LayoutParams LayoutParameters = new FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.MATCH_PARENT);
+        private CustomViewCallback mCustomViewCallback;
+
+        @Override
+        public void onShowCustomView(View view, CustomViewCallback callback) {
+            // if a view already exists then immediately terminate the new one
+            if (mCustomView != null) {
+                callback.onCustomViewHidden();
+                return;
+            }
+            mContentView = (FrameLayout) view.findViewById(R.id.fragment_webview_player);
+            mContentView.setVisibility(View.GONE);
+            mCustomViewContainer = new FrameLayout(getActivity());
+            mCustomViewContainer.setLayoutParams(LayoutParameters);
+            mCustomViewContainer.setBackgroundResource(android.R.color.black);
+            view.setLayoutParams(LayoutParameters);
+            mCustomViewContainer.addView(view);
+            mCustomView = view;
+            mCustomViewCallback = callback;
+            mCustomViewContainer.setVisibility(View.VISIBLE);
+            getActivity().setContentView(mCustomViewContainer);
+        }
+
+        @Override
+        public void onHideCustomView() {
+            if (mCustomView == null) {
+                return;
+            } else {
+                // Hide the custom view.
+                mCustomView.setVisibility(View.GONE);
+                // Remove the custom view from its container.
+                mCustomViewContainer.removeView(mCustomView);
+                mCustomView = null;
+                mCustomViewContainer.setVisibility(View.GONE);
+                mCustomViewCallback.onCustomViewHidden();
+                // Show the content view.
+                mContentView.setVisibility(View.VISIBLE);
+                getActivity().setContentView(mContentView);
+            }
+        }
+    }
+
+
 }

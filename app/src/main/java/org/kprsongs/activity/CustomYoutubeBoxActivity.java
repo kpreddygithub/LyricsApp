@@ -43,8 +43,7 @@ import org.kprsongs.glorytogod.R;
  * custom behaviour, such as closing when the user clicks anywhere outside the player
  * We manage to avoid rebuffering the video by setting some configchange flags on this activities declaration in the manifest.
  */
-public class CustomYoutubeBoxActivity extends YouTubeBaseActivity implements YouTubePlayer.OnInitializedListener
-{
+public class CustomYoutubeBoxActivity extends YouTubeBaseActivity implements YouTubePlayer.OnInitializedListener {
 
     //Keys
     public static final String KEY_VIDEO_ID = "KEY_VIDEO_ID";
@@ -57,17 +56,14 @@ public class CustomYoutubeBoxActivity extends YouTubeBaseActivity implements You
     private String mVideoId;
 
     @Override
-    protected void onCreate(Bundle bundle)
-    {
+    protected void onCreate(Bundle bundle) {
         super.onCreate(bundle);
         setContentView(R.layout.custom_youtube_box_activity);
 
         final RelativeLayout relativeLayout = (RelativeLayout) findViewById(R.id.relativeLayout_youtube_activity);
-        relativeLayout.setOnClickListener(new View.OnClickListener()
-        {
+        relativeLayout.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v)
-            {
+            public void onClick(View v) {
                 onBackPressed();
             }
         });
@@ -89,16 +85,13 @@ public class CustomYoutubeBoxActivity extends YouTubeBaseActivity implements You
     }
 
     @Override
-    public void onInitializationSuccess(YouTubePlayer.Provider provider, YouTubePlayer youTubePlayer, boolean wasRestored)
-    {
+    public void onInitializationSuccess(YouTubePlayer.Provider provider, YouTubePlayer youTubePlayer, boolean wasRestored) {
         mPlayer = youTubePlayer;
         youTubePlayer.setFullscreenControlFlags(YouTubePlayer.FULLSCREEN_FLAG_CONTROL_ORIENTATION);
         youTubePlayer.addFullscreenControlFlag(YouTubePlayer.FULLSCREEN_FLAG_CONTROL_SYSTEM_UI);
-        youTubePlayer.setOnFullscreenListener(new YouTubePlayer.OnFullscreenListener()
-        {
+        youTubePlayer.setOnFullscreenListener(new YouTubePlayer.OnFullscreenListener() {
             @Override
-            public void onFullscreen(boolean b)
-            {
+            public void onFullscreen(boolean b) {
                 isFullscreen = b;
             }
         });
@@ -113,14 +106,12 @@ public class CustomYoutubeBoxActivity extends YouTubeBaseActivity implements You
     }
 
     @Override
-    public void onInitializationFailure(YouTubePlayer.Provider provider, YouTubeInitializationResult youTubeInitializationResult)
-    {
+    public void onInitializationFailure(YouTubePlayer.Provider provider, YouTubeInitializationResult youTubeInitializationResult) {
         Toast.makeText(this, "Unable to load video", Toast.LENGTH_LONG).show();
     }
 
     @Override
-    protected void onSaveInstanceState(Bundle outState)
-    {
+    protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
 
         if (mPlayer != null) {
@@ -130,19 +121,16 @@ public class CustomYoutubeBoxActivity extends YouTubeBaseActivity implements You
     }
 
     @Override
-    public void onBackPressed()
-    {
+    public void onBackPressed() {
         //If the Player is fullscreen then the transition crashes on L when navigating back to the MainActivity
         boolean finish = true;
         try {
             if (mPlayer != null) {
                 if (isFullscreen) {
                     finish = false;
-                    mPlayer.setOnFullscreenListener(new YouTubePlayer.OnFullscreenListener()
-                    {
+                    mPlayer.setOnFullscreenListener(new YouTubePlayer.OnFullscreenListener() {
                         @Override
-                        public void onFullscreen(boolean b)
-                        {
+                        public void onFullscreen(boolean b) {
                             //Wait until we are out of fullscreen before finishing this activity
                             if (!b) {
                                 finish();
