@@ -69,8 +69,8 @@ public class AuthorListFragment extends ListFragment implements SwipeRefreshLayo
                     authorsNames.add(author.getDisplayName());
                 }
                 Collections.sort(authorsNames);
-//            adapter = adapterService.getAuthorListAdapter(authorsNames, getFragmentManager());
-//            setListAdapter(adapter);
+            adapter = adapterService.getAuthorListAdapter(authorsNames, getFragmentManager());
+            setListAdapter(adapter);
             }
         }
     }

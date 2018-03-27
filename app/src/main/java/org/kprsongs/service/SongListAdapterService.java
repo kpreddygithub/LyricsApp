@@ -17,18 +17,16 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 
 import org.kprsongs.CommonConstants;
 import org.kprsongs.SongsApplication;
-import org.kprsongs.dao.SongDao;
-import org.kprsongs.domain.FirebaseSong;
-import org.kprsongs.domain.Setting;
-import org.kprsongs.domain.Song;
-import org.kprsongs.fragment.AddPlayListsDialogFragment;
 import org.kprsongs.activity.CustomYoutubeBoxActivity;
 import org.kprsongs.activity.SongContentViewActivity;
+import org.kprsongs.dao.SongDao;
+import org.kprsongs.domain.Setting;
+import org.kprsongs.domain.Song;
 import org.kprsongs.domain.Verse;
+import org.kprsongs.fragment.AddPlayListsDialogFragment;
 import org.kprsongs.fragment.ListDialogFragment;
 import org.kprsongs.glorytogod.R;
 
@@ -60,12 +58,13 @@ public class SongListAdapterService {
                 final TextView textView = (TextView) rowView.findViewById(R.id.songsTextView);
                 textView.setText(songs.get(position).getTitle());
 
-                final ImageView imageView = (ImageView) rowView.findViewById(R.id.optionMenuIcon);
+                final ImageView imageView = (ImageView) rowView.findViewById(R.id.fav_menu_icon);
 
                 imageView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        showPopupMenu(v, String.valueOf(textView.getText()), fragmentManager);
+                        getAddfavouriteDialogFragment(String.valueOf(textView.getText()), fragmentManager);
+//                        showPopupMenu(v, String.valueOf(textView.getText()), fragmentManager);
                     }
                 });
 
@@ -131,7 +130,7 @@ public class SongListAdapterService {
         popupMenu.show();
     }
 
-    private void getAddfavouriteDialogFragment(final String songName, final FragmentManager fragmentManager) {
+    public void getAddfavouriteDialogFragment(final String songName, final FragmentManager fragmentManager) {
         dialogFragment = new ListDialogFragment() {
             @Override
             public String[] getProductListsArray() {

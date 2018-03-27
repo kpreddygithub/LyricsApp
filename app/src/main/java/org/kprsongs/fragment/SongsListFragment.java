@@ -20,9 +20,9 @@ import android.widget.PopupWindow;
 
 import org.kprsongs.dao.SongDao;
 import org.kprsongs.domain.Song;
-import org.kprsongs.utils.CommonUtils;
-import org.kprsongs.service.SongListAdapterService;
 import org.kprsongs.glorytogod.R;
+import org.kprsongs.service.SongListAdapterService;
+import org.kprsongs.utils.CommonUtils;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -67,8 +67,8 @@ public class SongsListFragment extends ListFragment implements SwipeRefreshLayou
         List<String> serviceNames = new ArrayList<String>();
         // serviceNames.addAll(commonService.readServiceName());
         //setServiceNames(serviceNames);
-        //adapter = adapterService.getNewSongListAdapter(songs, getFragmentManager());
-        // setListAdapter(adapter);
+        adapter = adapterService.getNewSongListAdapter(songs, getFragmentManager());
+        setListAdapter(adapter);
     }
 
     @Override

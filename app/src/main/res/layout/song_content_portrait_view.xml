@@ -37,13 +37,23 @@
             android:textColor="@color/primary_text_default_material_dark"
             android:textSize="20dp" />
 
+
         <ImageView
-            android:id="@+id/optionMenu"
+            android:id="@+id/fav_menu_icon"
             android:layout_width="25dp"
             android:layout_height="30dp"
             android:layout_marginRight="10dp"
             android:layout_marginTop="14dp"
-            android:src="@drawable/option_menu" />
+            android:src="@drawable/ic_fav" />
+
+        <ImageView
+            android:id="@+id/share_menu_item"
+            android:layout_width="25dp"
+            android:layout_height="30dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="14dp"
+            android:src="@android:drawable/ic_menu_share" />
+
     </LinearLayout>
 
 

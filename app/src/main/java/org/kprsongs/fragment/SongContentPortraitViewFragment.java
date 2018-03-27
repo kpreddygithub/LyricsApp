@@ -4,8 +4,6 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -17,13 +15,11 @@ import android.view.WindowManager;
 import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
-import android.webkit.WebViewClient;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.getbase.floatingactionbutton.FloatingActionButton;
 import com.google.android.youtube.player.YouTubeInitializationResult;
 import com.google.android.youtube.player.YouTubePlayer;
 import com.google.android.youtube.player.YouTubePlayerSupportFragment;
@@ -35,10 +31,10 @@ import org.kprsongs.adapter.SongCardViewAdapter;
 import org.kprsongs.dao.SongDao;
 import org.kprsongs.domain.Setting;
 import org.kprsongs.domain.Song;
-import org.kprsongs.service.SongListAdapterService;
-import org.kprsongs.service.UtilitiesService;
-import org.kprsongs.service.UserPreferenceSettingService;
 import org.kprsongs.glorytogod.R;
+import org.kprsongs.service.SongListAdapterService;
+import org.kprsongs.service.UserPreferenceSettingService;
+import org.kprsongs.service.UtilitiesService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -122,14 +118,22 @@ public class SongContentPortraitViewFragment extends Fragment implements YouTube
 
     private void setOptionsImageView(View view, final List<String> contents) {
         ImageView imageView = (ImageView) view.findViewById(R.id.back_navigation);
-        ImageView optionMenu = (ImageView) view.findViewById(R.id.optionMenu);
+        ImageView shareButton = (ImageView) view.findViewById(R.id.share_menu_item);
+        ImageView favButton = (ImageView) view.findViewById(R.id.fav_menu_icon);
+        favButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                songListAdapterService = new SongListAdapterService();
+                songListAdapterService.getAddfavouriteDialogFragment(title, getFragmentManager());
+            }
+        });
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 getActivity().finish();
             }
         });
-        optionMenu.setOnClickListener(new View.OnClickListener() {
+        shareButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 StringBuilder builder = new StringBuilder();
@@ -139,8 +143,16 @@ public class SongContentPortraitViewFragment extends Fragment implements YouTube
                 }
                 builder.append("\n").append("\n").append(getActivity().getString(R.string.share_info));
                 String formattedText = builder.toString().replaceAll("\\{\\w\\}", "").replaceAll("\\{/\\w\\}", "");
-                songListAdapterService = new SongListAdapterService();
-                songListAdapterService.ShowSharePopupmenu(v, title, getFragmentManager(), formattedText);
+//                songListAdapterService = new SongListAdapterService();
+//                songListAdapterService.ShowSharePopupmenu(v, title, getFragmentManager(), formattedText);
+
+                Intent textShareIntent = new Intent(Intent.ACTION_SEND);
+                textShareIntent.putExtra(Intent.EXTRA_TEXT, formattedText);
+                textShareIntent.setType("text/plain");
+                Intent intent = Intent.createChooser(textShareIntent, "Share " + title + " with...");
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                application.getContext().startActivity(intent);
+
             }
         });
     }

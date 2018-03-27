@@ -1,9 +1,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:tools="http://schemas.android.com/tools"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:orientation="vertical"
-              >
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
     <!--<include-->
     <!--android:id="@+id/tool_bar"-->
@@ -12,18 +10,116 @@
     <!--android:layout_width="match_parent"-->
     <!--/>-->
 
-    <org.kprsongs.component.SlidingTabLayout
-        android:id="@+id/tabs"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/light_navy_blue"
-        android:elevation="2dp"/>
+    <!--    <org.kprsongs.component.SlidingTabLayout
+            android:id="@+id/tabs"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/dark_navy_blue"
+            android:elevation="2dp" />-->
 
-    <android.support.v4.view.ViewPager
-        android:id="@+id/pager"
+    <FrameLayout
+        android:id="@+id/framelayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="1">
-    </android.support.v4.view.ViewPager>
+        android:layout_weight="1"/>
+
+
+    <!--    <android.support.v4.view.ViewPager
+            android:id="@+id/pager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"/>-->
+
+    <LinearLayout
+        android:id="@+id/bottomBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:paddingLeft="@dimen/dimen_10"
+        android:paddingRight="@dimen/dimen_10"
+        android:paddingTop="@dimen/dimen_10">
+
+        <LinearLayout
+            android:id="@+id/layout_song_list"
+            android:layout_width="1dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/song_list_iv"
+                android:layout_width="25dp"
+                android:layout_height="20dp"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_pricelist_icon" />
+
+            <TextView
+                android:id="@+id/song_list_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/dimen_8"
+                android:text="@string/titles"
+                android:textAllCaps="false"
+                android:textColor="@color/colorPrimary_1000" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/layout_author"
+            android:layout_width="1dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/dimen_10"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/author_iv"
+                android:layout_width="@dimen/dimen_25"
+                android:layout_height="@dimen/dimen_20"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_album_nofill" />
+
+            <TextView
+                android:id="@+id/author_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/dimen_8"
+                android:text="@string/artists"
+                android:textAllCaps="false"
+                android:textColor="@color/liteGray" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/layout_fav"
+            android:layout_width="1dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/dimen_10"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/fav_iv"
+                android:layout_width="@dimen/dimen_25"
+                android:layout_height="@dimen/dimen_20"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_favorite_gray" />
+
+            <TextView
+                android:id="@+id/fav_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/dimen_8"
+                android:text="@string/playlists"
+                android:textAllCaps="false"
+                android:textColor="@color/liteGray" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
 
 </LinearLayout> 

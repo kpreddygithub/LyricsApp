@@ -6,7 +6,7 @@
     <color name="clear">#00000000</color>
     <color name="blue">#0066CC</color>
     <color name="darkGray">#787878</color>
-    <color name="liteGray">#83373138</color>
+    <color name="liteGray">#78818C</color>
     <color name="red_light">#ffff4444</color>
     <color name="green_light">#ff99cc00</color>
     <color name="orange_light">#ffffbb33</color>
@@ -31,12 +31,16 @@
     <color name="dark_brown">#880000</color>
     <color name="light_brown">#a20000</color>
     <!--#06a1ee-->
-    <color name="dark_navy_blue">#ca1329</color>
-    <color name="light_navy_blue">#ca1329</color>
-    <color name="shade_blue">#E57373</color>
+    <color name="dark_navy_blue">#7e14ff</color>
+    <color name="light_navy_blue">#7e14ff</color>
+    <color name="shade_blue">#78818c</color>
     <color name="disabled_white">#F2F2F2</color>
 
-    <color name="colorPrimary_1000">#ca1329</color>
+    <!--<color name="colorPrimary_1000">#ca1329</color>
     <color name="colorPrimaryDark_1000">#ca1329</color>
     <color name="colorAccent_1000">#E57373</color>
+    -->
+    <color name="colorPrimary_1000">#7e14ff</color>
+    <color name="colorPrimaryDark_1000">#7e14ff</color>
+    <color name="colorAccent_1000">#ff21ae</color>
 </resources>
