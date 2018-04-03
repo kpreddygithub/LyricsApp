@@ -34,16 +34,17 @@
         android:id="@+id/bottomBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/white"
-        android:paddingLeft="@dimen/dimen_10"
-        android:paddingRight="@dimen/dimen_10"
-        android:paddingTop="@dimen/dimen_10">
+        android:background="@color/gray">
 
         <LinearLayout
             android:id="@+id/layout_song_list"
             android:layout_width="1dp"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="1"
+            android:background="@color/white"
+            android:paddingTop="1dp"
+            android:paddingRight="1dp"
+            android:layout_marginRight="1dp"
             android:orientation="vertical">
 
             <ImageView
@@ -68,9 +69,12 @@
         <LinearLayout
             android:id="@+id/layout_author"
             android:layout_width="1dp"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/dimen_10"
+            android:layout_height="match_parent"
             android:layout_weight="1"
+            android:background="@color/white"
+            android:paddingTop="1dp"
+            android:paddingRight="1dp"
+            android:layout_marginRight="1dp"
             android:orientation="vertical">
 
             <ImageView
@@ -95,9 +99,10 @@
         <LinearLayout
             android:id="@+id/layout_fav"
             android:layout_width="1dp"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/dimen_10"
+            android:layout_height="match_parent"
             android:layout_weight="1"
+            android:background="@color/white"
+            android:paddingTop="1dp"
             android:orientation="vertical">
 
             <ImageView

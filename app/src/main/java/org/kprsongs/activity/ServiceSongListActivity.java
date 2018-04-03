@@ -19,12 +19,13 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
-
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -35,9 +36,9 @@ import org.kprsongs.dao.SongDao;
 import org.kprsongs.domain.Setting;
 import org.kprsongs.domain.Song;
 import org.kprsongs.domain.Verse;
+import org.kprsongs.glorytogod.R;
 import org.kprsongs.parser.VerseParser;
 import org.kprsongs.utils.PropertyUtils;
-import org.kprsongs.glorytogod.R;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -47,8 +48,7 @@ import java.util.List;
  * Author: K Purushotham Reddy
  * version 1.0.0
  */
-public class ServiceSongListActivity extends AppCompatActivity
-{
+public class ServiceSongListActivity extends AppCompatActivity {
     private ListView songListView;
     private VerseParser verseparser;
     private String songTitle;
@@ -61,10 +61,10 @@ public class ServiceSongListActivity extends AppCompatActivity
     String serviceName;
     private Context context = SongsApplication.getContext();
     private File serviceFile = null;
+    ListAdapter listAdapter;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.songs_list_activity);
         Intent intent = getIntent();
@@ -81,11 +81,9 @@ public class ServiceSongListActivity extends AppCompatActivity
         loadSongs();
 
         final Vibrator vibrator = (Vibrator) this.getSystemService(Context.VIBRATOR_SERVICE);
-        songListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener()
-        {
+        songListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
-            public boolean onItemLongClick(AdapterView<?> arg0, View arg1, final int position, long arg3)
-            {
+            public boolean onItemLongClick(AdapterView<?> arg0, View arg1, final int position, long arg3) {
                 vibrator.vibrate(15);
                 songTitle = songListView.getItemAtPosition(position).toString();
                 LayoutInflater li = LayoutInflater.from(ServiceSongListActivity.this);
@@ -94,30 +92,26 @@ public class ServiceSongListActivity extends AppCompatActivity
                 deleteMsg.setText(R.string.message_delete_song);
                 AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(ServiceSongListActivity.this);
                 alertDialogBuilder.setView(promptsView);
-                alertDialogBuilder.setCancelable(false).setPositiveButton(getString(R.string.ok), new DialogInterface.OnClickListener()
-                {
-                    public void onClick(DialogInterface dialog, int id)
-                    {
+                alertDialogBuilder.setCancelable(false).setPositiveButton(getString(R.string.ok), new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
                         serviceFile = PropertyUtils.getPropertyFile(ServiceSongListActivity.this, CommonConstants.SERVICE_PROPERTY_TEMP_FILENAME);
                         removeSong();
                         loadSongs();
                         Toast.makeText(ServiceSongListActivity.this, "Song " + songTitle + " Deleted...!", Toast.LENGTH_LONG).show();
                     }
-                }).setNegativeButton(getString(R.string.cancel), new DialogInterface.OnClickListener()
-                {
-                    public void onClick(DialogInterface dialog, int id)
-                    {
+                }).setNegativeButton(getString(R.string.cancel), new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
                         dialog.cancel();
                     }
                 });
                 final AlertDialog alertDialog = alertDialogBuilder.create();
-                alertDialog.setOnShowListener(new DialogInterface.OnShowListener()
-                {
+                alertDialog.setOnShowListener(new DialogInterface.OnShowListener() {
                     @Override
-                    public void onShow(DialogInterface dialog)
-                    {
+                    public void onShow(DialogInterface dialog) {
                         Button negativeButton = alertDialog.getButton(DialogInterface.BUTTON_NEGATIVE);
-                        negativeButton.setTextColor(getResources().getColor(R.color.accent_material_light));
+                        Button positiveButton = alertDialog.getButton(DialogInterface.BUTTON_POSITIVE);
+                        negativeButton.setTextColor(getResources().getColor(R.color.liteGray));
+                        positiveButton.setTextColor(getResources().getColor(R.color.colorPrimary_1000));
                     }
                 });
                 alertDialog.show();
@@ -125,11 +119,9 @@ public class ServiceSongListActivity extends AppCompatActivity
             }
         });
 
-        songListView.setOnItemClickListener(new AdapterView.OnItemClickListener()
-        {
+        songListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id)
-            {
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
                 Intent intent = new Intent(ServiceSongListActivity.this, SongContentViewActivity.class);
                 Bundle bundle = new Bundle();
@@ -142,8 +134,7 @@ public class ServiceSongListActivity extends AppCompatActivity
         });
     }
 
-    private void loadSongs()
-    {
+    private void loadSongs() {
         File serviceFile = PropertyUtils.getPropertyFile(this, CommonConstants.SERVICE_PROPERTY_TEMP_FILENAME);
         String property = PropertyUtils.getProperty(serviceName, serviceFile);
         String propertyValues[] = property.split(";");
@@ -152,11 +143,12 @@ public class ServiceSongListActivity extends AppCompatActivity
             titles.add(title);
         }
         adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, propertyValues);
-        songListView.setAdapter(adapter);
+        listAdapter = new ListAdapter(this);
+        songListView.setAdapter(listAdapter);
+//        songListView.setAdapter(adapter);
     }
 
-    private void removeSong()
-    {
+    private void removeSong() {
         try {
             String propertyValue = "";
             System.out.println("Preparing to remove service:" + songTitle);
@@ -180,13 +172,11 @@ public class ServiceSongListActivity extends AppCompatActivity
     }
 
 
-    private List<Verse> getVerse(String lyrics)
-    {
+    private List<Verse> getVerse(String lyrics) {
         return verseparser.parseVerseDom(this, lyrics);
     }
 
-    private List<String> getVerseByVerseOrder(String verseOrder)
-    {
+    private List<String> getVerseByVerseOrder(String verseOrder) {
         String split[] = verseOrder.split("\\s+");
         List<String> verses = new ArrayList<String>();
         for (int i = 0; i < split.length; i++) {
@@ -197,8 +187,7 @@ public class ServiceSongListActivity extends AppCompatActivity
 
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu)
-    {
+    public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.action_bar_menu, menu);
         SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
@@ -208,18 +197,15 @@ public class ServiceSongListActivity extends AppCompatActivity
         ImageView image = (ImageView) searchView.findViewById(R.id.search_close_btn);
         Drawable drawable = image.getDrawable();
         drawable.setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_ATOP);
-        SearchView.OnQueryTextListener textChangeListener = new SearchView.OnQueryTextListener()
-        {
+        SearchView.OnQueryTextListener textChangeListener = new SearchView.OnQueryTextListener() {
             @Override
-            public boolean onQueryTextChange(String newText)
-            {
+            public boolean onQueryTextChange(String newText) {
                 adapter.getFilter().filter(newText);
                 return true;
             }
 
             @Override
-            public boolean onQueryTextSubmit(String query)
-            {
+            public boolean onQueryTextSubmit(String query) {
                 adapter.getFilter().filter(query);
                 return true;
             }
@@ -229,13 +215,49 @@ public class ServiceSongListActivity extends AppCompatActivity
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item)
-    {
+    public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
                 finish();
                 break;
         }
         return true;
+    }
+
+    private class ListAdapter extends BaseAdapter {
+        LayoutInflater inflater;
+
+        public ListAdapter(Context context) {
+            inflater = LayoutInflater.from(context);
+        }
+
+        public View getView(int position, View convertView, ViewGroup parent) {
+            convertView = inflater.inflate(R.layout.service_listview_content, null);
+            TextView serviceName = (TextView) convertView.findViewById(R.id.serviceName);
+            ImageView listIv = (ImageView) convertView.findViewById(R.id.list_iv);
+            ImageView delete = (ImageView) convertView.findViewById(R.id.delete);
+            listIv.setImageDrawable(getResources().getDrawable(R.drawable.ic_album_lite));
+
+            delete.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                }
+            });
+            serviceName.setText(titles.get(position).trim());
+            return convertView;
+        }
+
+        public int getCount() {
+            return titles.size();
+        }
+
+        public Object getItem(int position) {
+            return position;
+        }
+
+        public long getItemId(int position) {
+            return position;
+        }
     }
 }
