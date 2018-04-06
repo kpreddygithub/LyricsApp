@@ -11,4 +11,7 @@
     <dimen name="dimen_8">8dp</dimen>
     <dimen name="dimen_25">25dp</dimen>
     <dimen name="dimen_20">20dp</dimen>
+    <dimen name="nav_header_vertical_spacing">8dp</dimen>
+    <dimen name="nav_header_height">176dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
 </resources>

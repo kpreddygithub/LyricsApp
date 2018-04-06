@@ -4,35 +4,43 @@
 
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="com.moengage.demoapp.permission.C2D_MESSAGE" />
+    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
 
     <application
         android:name="org.kprsongs.SongsApplication"
         android:allowBackup="true"
-        android:icon="@drawable/ic_launcher"
-        android:label="Telugu Lyrics"
         android:hardwareAccelerated="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
         android:theme="@style/MainAppTheme">
-
         <activity
             android:name="org.kprsongs.activity.SplashScreenActivity"
-            android:theme="@style/MainAppTheme">
+            android:theme="@style/AppTheme.Base">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
-            android:name="org.kprsongs.activity.NavigationDrawerActivity"
+            android:name="org.kprsongs.activity.NavigatinDrawerActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="fullSensor"
-            android:theme="@style/MaterialAppTheme">
-            <!--android:launchMode="singleTask">-->
+            android:theme="@style/AppTheme.Base">
+
+            <!-- android:launchMode="singleTask"> -->
             <meta-data
                 android:name="android.app.searchable"
                 android:resource="@xml/searchable" />
         </activity>
-
-        <activity android:name="org.kprsongs.activity.SongContentViewActivity"></activity>
+        <activity android:name="org.kprsongs.activity.SongContentViewActivity" />
         <activity
             android:name="org.kprsongs.activity.ServiceSongListActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
@@ -48,26 +56,37 @@
             android:theme="@style/Theme.CustomPreferenceSetting">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="org.kprsongs.activity.NavigationDrawerActivity" />
+                android:value="org.kprsongs.activity.NavigatinDrawerActivity" />
         </activity>
-        <activity android:name="org.kprsongs.activity.SongListActivity"></activity>
-        <activity android:name="org.kprsongs.fragment.DisplayNewSongsActivity"></activity>
+        <activity android:name="org.kprsongs.activity.SongListActivity" />
+        <activity android:name="org.kprsongs.fragment.DisplayNewSongsActivity" />
         <activity
             android:name="org.kprsongs.activity.CustomYoutubeBoxActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:theme="@style/AppTheme.Translucent" />
 
+        <service android:name="org.kprsongs.push.MyFirebaseMessageService">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+        <service android:name="org.kprsongs.push.MyFirebaseInstanceIDService">
+            <intent-filter>
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
+            </intent-filter>
+        </service>
 
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_icon"
+            android:resource="@drawable/ic_launcher" />
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_color"
+            android:resource="@color/colorPrimary_1000" />
+
+<!--        <activity
+            android:name="org.kprsongs.activity.NavigatinDrawerActivity"
+            android:label="@string/title_activity_navigatin_drawer"
+            android:theme="@style/MainAppTheme.NoActionBar"></activity>-->
     </application>
-
-    <!--permissions to access remote url-->
-
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.INTERNET"></uses-permission>
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"></uses-permission>
-    <uses-permission android:name="android.permission.READ_PHONE_STATE"></uses-permission>
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.VIBRATE" />
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
 
 </manifest>

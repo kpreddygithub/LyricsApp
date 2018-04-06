@@ -9,7 +9,7 @@
         android:layout_alignParentLeft="true"
         android:layout_centerHorizontal="true"/>
         <!--android:background="@drawable/ic_drawer"-->
-        <!--android:id="@+id/serviceIcon" />-->
+        <!--andrfcmTokend:idfcmToken@+id/serviceIcon" />-->
 
     <TextView
         android:layout_width="wrap_content"

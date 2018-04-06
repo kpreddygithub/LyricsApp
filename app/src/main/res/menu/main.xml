@@ -1,7 +1,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:appcompat="http://schemas.android.com/apk/res-auto" >
 
-    <!--<item android:id="@+id/action_settings"-->
+    <!--<item andrfcmTokend:idfcmToken@+id/action_settings"-->
         <!--android:title="@string/action_settings"-->
         <!--android:icon="@drawable/ic_settings"-->
         <!--android:showAsAction="always"-->
@@ -9,16 +9,16 @@
 
     <!--
         <group android:checkableBehavior="single">
-            <item android:id="@+id/sectionView"
+            <item andrfcmTokend:idfcmToken@+id/sectionView"
                 android:title="Columned View"/>
         </group>
 
 
-    <item android:id="@+id/text_settings"
+    <item andrfcmTokend:idfcmToken@+id/text_settings"
         android:title="@string/text_settings"
         tools:ignore="AppCompatResource"/>
 
-    <item android:id="@+id/custom_tab_settings"
+    <item andrfcmTokend:idfcmToken@+id/custom_tab_settings"
         android:title="@string/custom_tab_settings"
         tools:ignore="AppCompatResource"/>-->
 </menu>

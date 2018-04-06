@@ -18,6 +18,13 @@ public final class CommonConstants
     public static final String START_TAG_PATTERN = "\\{[\\w,\\W,\\d,\\D]\\}";
     public static final String END_TAG_PATTERN = "\\{\\[\\w,\\W,\\d,\\D]\\}";
 
+    public static final String FcmTOKEN = "FcmToken";
+    public static final String isRefreshedToken = "isRefreshedToken";
+    //Google Sign-in Account Info
+    public static final String AccountName = "AccountName";
+    public static final String AccountEmail = "AccountEmail";
+    public static final String AccountToken = "AccountToken";
+    public static final String AccountPhoto = "AccountPhoto";
 
     public static final String TITLE_LIST_KEY = "titles";
 

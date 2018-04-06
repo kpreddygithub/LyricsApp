@@ -63,6 +63,7 @@ public class AddSongFragment extends Fragment {
 
         songs = songDao.findAll();
 
+/*
         for (int i = 0; i < songs.size(); i++) {
             Song song = songs.get(i);
             FirebaseSong firebaseSong = new FirebaseSong();
@@ -98,6 +99,7 @@ public class AddSongFragment extends Fragment {
             database.child("songs").child(firebaseSong.getSongNumber()).setValue(firebaseSong);
 
         }
+*/
 
         submit_song.setOnClickListener(new View.OnClickListener() {
             @Override
