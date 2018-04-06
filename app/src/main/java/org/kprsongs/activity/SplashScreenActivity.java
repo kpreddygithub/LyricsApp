@@ -103,7 +103,7 @@ public class SplashScreenActivity extends AppCompatActivity implements GoogleApi
         commonPropertyFile = PropertyUtils.getPropertyFile(this, CommonConstants.COMMON_PROPERTY_TEMP_FILENAME);
         externalCacheDir = getExternalCacheDir();
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-        loadDatabase();
+//        loadDatabase();
 
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client_id))
