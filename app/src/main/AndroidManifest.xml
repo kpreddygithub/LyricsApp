@@ -33,7 +33,8 @@
             android:name="org.kprsongs.activity.NavigatinDrawerActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="fullSensor"
-            android:theme="@style/AppTheme.Base">
+            android:theme="@style/AppTheme.Base"
+            android:windowSoftInputMode="adjustPan">
 
             <!-- android:launchMode="singleTask"> -->
             <meta-data
@@ -41,6 +42,9 @@
                 android:resource="@xml/searchable" />
         </activity>
         <activity android:name="org.kprsongs.activity.SongContentViewActivity" />
+        <activity
+            android:name="org.kprsongs.activity.LaunchActivity"
+            android:theme="@style/AppTheme.Base" />
         <activity
             android:name="org.kprsongs.activity.ServiceSongListActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
@@ -83,10 +87,10 @@
             android:name="com.google.firebase.messaging.default_notification_color"
             android:resource="@color/colorPrimary_1000" />
 
-<!--        <activity
-            android:name="org.kprsongs.activity.NavigatinDrawerActivity"
-            android:label="@string/title_activity_navigatin_drawer"
-            android:theme="@style/MainAppTheme.NoActionBar"></activity>-->
+        <!--        <activity
+                    android:name="org.kprsongs.activity.NavigatinDrawerActivity"
+                    android:label="@string/title_activity_navigatin_drawer"
+                    android:theme="@style/MainAppTheme.NoActionBar"></activity>-->
     </application>
 
 </manifest>

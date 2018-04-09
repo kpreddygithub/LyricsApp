@@ -86,9 +86,11 @@ public class NavigatinDrawerActivity extends AppCompatActivity
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
+/*
         if (id == R.id.action_settings) {
             return true;
         }
+*/
 
         return super.onOptionsItemSelected(item);
     }
@@ -101,10 +103,10 @@ public class NavigatinDrawerActivity extends AppCompatActivity
 
         if (id == R.id.nav_home) {
             fragmentTransaction(new HomeTabFragment(), R.id.main_framelayout);
-        } else if (id == R.id.nav_settings) {
+        } /*else if (id == R.id.nav_settings) {
             Intent intent = new Intent(NavigatinDrawerActivity.this, UserSettingActivity.class);
             startActivity(intent);
-        }
+        }*/
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);

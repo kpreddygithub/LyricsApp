@@ -4,19 +4,21 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <LinearLayout
+    <RelativeLayout
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="56dp"
         android:background="@color/light_navy_blue"
-        android:orientation="horizontal"
-        android:weightSum="6">
+        android:orientation="horizontal">
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:id="@+id/back_layout"
+            android:layout_width="wrap_content"
             android:layout_height="25dp"
+            android:layout_alignParentLeft="true"
             android:layout_marginTop="14dp"
-            android:layout_weight="5">
+            android:paddingLeft="@dimen/dimen_8"
+            android:paddingRight="@dimen/dimen_8">
 
             <ImageView
                 android:id="@+id/back_navigation"
@@ -30,7 +32,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="13dp"
-            android:layout_weight="1"
+            android:layout_toLeftOf="@+id/fav_menu_icon"
+            android:layout_toRightOf="@+id/back_layout"
             android:singleLine="true"
             android:text="foobar"
             android:textAppearance="@style/TextAppearance.AppCompat.Widget.ActionBar.Title"
@@ -39,22 +42,24 @@
 
 
         <ImageView
+            android:id="@+id/share_menu_item"
+            android:layout_width="25dp"
+            android:layout_height="30dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="14dp"
+            android:src="@android:drawable/ic_menu_share" />
+
+        <ImageView
             android:id="@+id/fav_menu_icon"
             android:layout_width="25dp"
             android:layout_height="30dp"
             android:layout_marginRight="10dp"
             android:layout_marginTop="14dp"
+            android:layout_toLeftOf="@+id/share_menu_item"
             android:src="@drawable/ic_fav" />
 
-        <ImageView
-            android:id="@+id/share_menu_item"
-            android:layout_width="25dp"
-            android:layout_height="30dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginTop="14dp"
-            android:src="@android:drawable/ic_menu_share" />
-
-    </LinearLayout>
+    </RelativeLayout>
 
 
     <!--
@@ -96,18 +101,18 @@
         android:layout_below="@+id/fragment_webview_player"
         android:paddingTop="@dimen/abc_control_corner_material" />
 
-<!--
-    <com.getbase.floatingactionbutton.FloatingActionButton
-        andrfcmTokend:idfcmToken@+id/play_song_fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:visibility="gone"
-        fab:fab_colorNormal="@color/dark_navy_blue"
-        fab:fab_colorPressed="@color/light_navy_blue"
-        fab:fab_icon="@drawable/ic_play_arrow_white" />
--->
+    <!--
+        <com.getbase.floatingactionbutton.FloatingActionButton
+            andrfcmTokend:idfcmToken@+id/play_song_fab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:visibility="gone"
+            fab:fab_colorNormal="@color/dark_navy_blue"
+            fab:fab_colorPressed="@color/light_navy_blue"
+            fab:fab_icon="@drawable/ic_play_arrow_white" />
+    -->
 
 </RelativeLayout>

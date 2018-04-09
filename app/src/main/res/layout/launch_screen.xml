@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context="org.kprsongs.activity.SplashScreenActivity">
+
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:adjustViewBounds="true"
+        android:indeterminateTint="@color/light_navy_blue"
+        android:indeterminateTintMode="src_atop"
+        android:resizeMode="horizontal|vertical"
+        android:visibility="invisible" />
+
+    <TextView
+        android:id="@+id/text_languageSelector"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_below="@+id/progress_bar"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:drawablePadding="4.7dp"
+        android:drawableRight="@drawable/ic_drop_down"
+        android:gravity="end"
+        android:lineSpacingExtra="-2.9sp"
+        android:text="@string/telugu"
+        android:textColor="@color/black" />
+
+
+    <ImageView
+        android:id="@+id/imgLogo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/text_languageSelector"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/dimen_20"
+        android:scaleType="centerInside"
+        android:src="@drawable/web_hi_res" />
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/imgLogo"
+        android:layout_centerHorizontal="true"
+        android:text="@string/telugu_lyrics"
+        android:textColor="@color/black"
+        android:textSize="@dimen/dimen_20" />
+
+    <TextView
+        android:id="@+id/subTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/title"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="4dp"
+        android:text="@string/sign_up_info"
+        android:textColor="@color/subtitle_color" />
+
+
+    <!--  <TextView
+          andrfcmTokend:idfcmToken@+id/btn_verifyMailID"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_belowfcmToken@+id/imgLogo"
+          android:layout_centerInParent="true"
+          android:layout_marginTop="15dp"
+          android:background="@drawable/bg_text_login"
+          android:paddingBottom="16dp"
+          android:paddingTop="16dp"
+          android:text="@string/sign_in_with_google"
+          android:textColor="@color/black"
+          tools:ignore="RtlHardcoded" />-->
+    <TextView
+        android:id="@+id/btn_RegisterMob"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/progress_bar"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="60dp"
+        android:background="@color/colorPrimary_1000"
+        android:gravity="center"
+        android:lineSpacingExtra="6.7sp"
+        android:paddingBottom="16dp"
+        android:paddingLeft="40dp"
+        android:paddingRight="40dp"
+        android:paddingTop="16dp"
+        android:text="@string/sign_in_with_google"
+        android:textColor="@color/white" />
+
+    <TextView
+        android:id="@+id/website_url"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="@dimen/dimen_20"
+        android:text="@string/website_url"
+        android:textColor="@color/subtitle_color" />
+
+
+    <TextView
+        android:id="@+id/version"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/website_url"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="@dimen/dimen_20"
+        android:text="@string/version"
+        android:textColor="@color/subtitle_color" />
+
+
+</RelativeLayout>
