@@ -78,28 +78,8 @@ public class SplashScreenActivity extends AppCompatActivity {
         commonPropertyFile = PropertyUtils.getPropertyFile(this, CommonConstants.COMMON_PROPERTY_TEMP_FILENAME);
         externalCacheDir = getExternalCacheDir();
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-<<<<<<< HEAD
         loadDatabase();
-=======
-//        loadDatabase();
 
-        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestIdToken(getString(R.string.default_web_client_id))
-                .requestEmail()
-                .build();
-
-        mGoogleApiClient = new GoogleApiClient.Builder(this)
-                .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
-                .build();
-
-        findViewById(R.id.btn_RegisterMob).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                signInToGoogle();
-            }
-        });
-
->>>>>>> parent of 3568fbd... added songs
     }
 
     private void loadDatabase() {

@@ -1,8 +1,17 @@
 package org.kprsongs.activity;
 
+import android.Manifest;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.database.Cursor;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
@@ -10,6 +19,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -106,7 +116,12 @@ public class NavigatinDrawerActivity extends AppCompatActivity
         } /*else if (id == R.id.nav_settings) {
             Intent intent = new Intent(NavigatinDrawerActivity.this, UserSettingActivity.class);
             startActivity(intent);
-        }*/
+        }*/ else if (id == R.id.nav_share) {
+            shareTheLink();
+        } else if (id == R.id.nav_whatsapp) {
+            onWhatsAppBtnClick();
+        }
+
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
@@ -132,4 +147,117 @@ public class NavigatinDrawerActivity extends AppCompatActivity
         database.child("users").child(id).setValue(user);
         SharedPrefUtils.putData(this, CommonConstants.isRefreshedToken, false);
     }
+
+    private void shareTheLink() {
+        Intent share = new Intent(Intent.ACTION_SEND);
+        share.setType("text/plain");
+        share.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
+        // Add data to the intent, the receiving app will decide
+        // what to do with it.
+        share.putExtra(Intent.EXTRA_SUBJECT, getResources().getString(R.string.share_msg_subject));
+        String url = "https://play.google.com/store/apps/details?id=org.app.mydukan";
+        share.putExtra(Intent.EXTRA_TEXT, getResources().getString(R.string.share_msg_text) + "\n " + url);
+        startActivity(Intent.createChooser(share, "Share link!"));
+    }
+
+    private void onWhatsAppBtnClick() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (checkSelfPermission(Manifest.permission.READ_CONTACTS) == PackageManager.PERMISSION_GRANTED &&
+                    checkSelfPermission(Manifest.permission.CALL_PHONE) == PackageManager.PERMISSION_GRANTED) {
+                if (contactExists(this, "+918074027107")) {
+                    sendwhatsapp();
+                }
+                if (!contactExists(this, "+918074027107")) {
+                    addcontact();
+                }
+            } else {
+                showPermissions();
+            }
+        } else {
+            if (contactExists(this, "+918074027107")) {
+                sendwhatsapp();
+            }
+            if (!contactExists(this, "+918074027107")) {
+                addcontact();
+            }
+        }
+    }
+
+    public void sendwhatsapp() {
+        Uri uri = Uri.parse("smsto:" + "+918074027107");
+        Intent i = new Intent(Intent.ACTION_SENDTO, uri);
+        i.setPackage("com.whatsapp");
+        startActivity(Intent.createChooser(i, ""));
+    }
+
+    public boolean contactExists(Context context, String number) {
+        // number is the phone number
+        Uri lookupUri = Uri.withAppendedPath(
+                ContactsContract.PhoneLookup.CONTENT_FILTER_URI,
+                Uri.encode(number));
+        String[] mPhoneNumberProjection = {ContactsContract.PhoneLookup._ID, ContactsContract.PhoneLookup.NUMBER, ContactsContract.PhoneLookup.DISPLAY_NAME};
+        Cursor cur = context.getContentResolver().query(lookupUri, mPhoneNumberProjection, null, null, null);
+        try {
+            if (cur != null) {
+                if (cur.moveToFirst()) {
+                    return true;
+                }
+            }
+        } finally {
+            if (cur != null)
+                cur.close();
+        }
+
+        return false;
+    }
+
+    public void addcontact() {
+        try {
+            Intent contactIntent = new Intent(ContactsContract.Intents.Insert.ACTION);
+            contactIntent.setType(ContactsContract.RawContacts.CONTENT_TYPE);
+
+            contactIntent.putExtra(ContactsContract.Intents.Insert.NAME, "TeluguLyricsApp")
+                    .putExtra(ContactsContract.Intents.Insert.PHONE, "+918074027107");
+            startActivityForResult(contactIntent, 1);
+
+        } catch (Exception e) {
+            Log.i("Cannot add", " cannot add");
+        }
+    }
+
+    private void showPermissions() {
+        if (Build.VERSION.SDK_INT >= 23) {
+            if (checkSelfPermission(Manifest.permission.READ_CONTACTS) == PackageManager.PERMISSION_GRANTED &&
+                    checkSelfPermission(Manifest.permission.CALL_PHONE) == PackageManager.PERMISSION_GRANTED) {
+                Log.e("testing", "Permission is granted");
+            } else {
+                new android.support.v7.app.AlertDialog.Builder(this)
+                        .setTitle("Info")
+                        .setMessage("Please do not deny any permissions, accept all permissions")
+                        .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                // continue
+                                ActivityCompat.requestPermissions(NavigatinDrawerActivity.this, new String[]{Manifest.permission.READ_CONTACTS, Manifest.permission.CALL_PHONE}, 1);
+                                dialog.dismiss();
+                            }
+                        })
+                        .setIcon(android.R.drawable.ic_dialog_alert)
+                        .show();
+            }
+        } else { //permission is automatically granted on sdk<23 upon installation
+            Log.e("testing", "Permission is already granted");
+
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
+        if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+            Log.i("permission", "granted");
+        } else {
+            Log.i("permission", "revoked");
+        }
+    }
+
+
 }

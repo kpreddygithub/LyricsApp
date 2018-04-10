@@ -8,23 +8,23 @@
             android:id="@+id/nav_home"
             android:icon="@drawable/ic_library_books_white"
             android:title="@string/home" />
-     <!--   <item
-            android:id="@+id/nav_settings"
-            android:icon="@drawable/ic_settings_white"
-            android:title="@string/settings" />-->
+        <!--   <item
+               android:id="@+id/nav_settings"
+               android:icon="@drawable/ic_settings_white"
+               android:title="@string/settings" />-->
     </group>
 
-    <!--    <item android:title="Communicate">
-            <menu>
-                <item
-                    android:id="@+id/nav_share"
-                    android:icon="@drawable/ic_menu_share"
-                    android:title="Share" />
-                <item
-                    android:id="@+id/nav_send"
-                    android:icon="@drawable/ic_menu_send"
-                    android:title="Send" />
-            </menu>
-        </item>-->
+    <item android:title="Communicate">
+        <menu>
+            <item
+                android:id="@+id/nav_share"
+                android:icon="@drawable/ic_menu_share"
+                android:title="Share" />
+            <item
+                android:id="@+id/nav_whatsapp"
+                android:icon="@drawable/ic_action_whatsapp"
+                android:title="Whatsapp us" />
+        </menu>
+    </item>
 
 </menu>

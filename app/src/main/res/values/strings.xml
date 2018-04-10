@@ -128,4 +128,7 @@
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="share_msg_text">Download Lyrics of Telugu Christian Songs App from Google Play Store @ </string>
+    <string name="share_msg_subject">Lyrics of Telugu Christian Songs - Android app</string>
 </resources>
